@@ -1,14 +1,11 @@
+//@ts-nocheck
 import React from 'react'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import Pdf from 'react-native-pdf';
-export default PdfViewer = (props) => {
+export const PdfViewer = (props:any) => {
   const [source,setSource] =  React.useState({uri:'http://samples.leanpub.com/thereactnativebook-sample.pdf', cache: true });
-
-
   return (
    <>
-   
-    
       <View style={styles.container}>
         <Pdf
         trustAllCerts={false}
