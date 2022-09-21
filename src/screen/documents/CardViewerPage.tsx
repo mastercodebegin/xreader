@@ -1,16 +1,16 @@
 //@ts-nocheck
 import React from 'react'
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
 import { DocumentView, RNPdftron } from "react-native-pdftron";
 import DocumentPicker from 'react-native-document-picker';
 import { CardViewer } from '../../component/CardView';
 import { scaledSize } from '../../helper/util/Utilities';
 export const CardViewerPage = (props: any) => {
 
-    const openFile = async (value:any) => {
+    const openFile = async (value: any) => {
         try {
             const res = await DocumentPicker.pick({
-                type: [value == 0 ?  DocumentPicker.types.docx : value == 1 ? DocumentPicker.types.pdf : value == 2 ? DocumentPicker.types.xlsx : value == 3  ? DocumentPicker.types.ppt   :  DocumentPicker.types.allFiles]
+                type: [value == 0 ? DocumentPicker.types.docx : value == 1 ? DocumentPicker.types.pdf : value == 2 ? DocumentPicker.types.xlsx : value == 3 ? DocumentPicker.types.ppt : value == 4 ? DocumentPicker.types.video : value == 5 ? DocumentPicker.types.images :   DocumentPicker.types.allFiles]
             });
             console.log(res, '------------------');
             const data = { uri: res[0]?.uri, cache: true }
@@ -28,7 +28,12 @@ export const CardViewerPage = (props: any) => {
     }
     return (
         <View style={styles.container}>
-            <Text style={{ textAlign: 'center', fontSize: scaledSize(40), marginTop: scaledSize(10), fontWeight: 'bold', fontStyle: 'italic' }}>Filess</Text>
+            <Text style={styles.textStyle}>Good Morning.</Text>
+            <Text style={styles.textStyle2}>Ricky</Text>
+            <TouchableOpacity style={styles.viewBox}>
+                <Text style={{left:scaledSize(20),top:scaledSize(20),color:'white',fontSize:19}}>Avaliable Space: 16gb</Text>
+            </TouchableOpacity>
+            <Text style={styles.textStyle3}>Categories</Text>
             <CardViewer onClick={openFile} />
         </View>)
 }
@@ -36,9 +41,21 @@ export const CardViewerPage = (props: any) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'#fae6d9',
+        backgroundColor: '#eff2ef',
         justifyContent: 'flex-start',
-        alignItems: 'center'
+        marginLeft: scaledSize(20),
+        marginRight: scaledSize(20)
+        // alignItems: 'center'
+    },
+    viewBox: { height: scaledSize(120), elevation: 2, backgroundColor: '#694ff2', marginTop: scaledSize(15), borderRadius: 10 },
+    textStyle: {
+        fontSize: scaledSize(20), marginTop: scaledSize(30), fontStyle: 'normal', marginLeft: scaledSize(5)
+    },
+    textStyle2: {
+        fontSize: scaledSize(30), marginTop: scaledSize(0), fontWeight: 'bold', fontStyle: 'normal',fontFamily:'Merriweather-Italic', marginLeft: scaledSize(5), color: '#36276b'
+    },
+    textStyle3: {
+        fontSize: scaledSize(25), marginTop: scaledSize(10), fontWeight: 'bold', fontStyle: 'normal',fontFamily:'Merriweather-Italic', marginLeft: scaledSize(5), color: '#36276b'
     },
     pdf: {
         flex: 1,
