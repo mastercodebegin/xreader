@@ -9,7 +9,7 @@ export const PdfViewer = (props:any) => {
       <View style={styles.container}>
         <Pdf
         trustAllCerts={false}
-          source={props?.data}
+          source={{uri: props?.data}}
           onLoadComplete={(numberOfPages, filePath) => {
             console.log(`Number of pages: ${numberOfPages}`);
           }}

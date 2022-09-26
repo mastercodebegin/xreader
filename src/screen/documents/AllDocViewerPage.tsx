@@ -4,6 +4,7 @@ import { Platform } from 'react-native';
 import { BackHandler } from 'react-native';
 import { Alert } from 'react-native';
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import  { PdfViewer }  from '../../component/PdfViewer'
 import { DocumentView, RNPdftron } from "react-native-pdftron";
 import { AllDocViewer } from '../../component/AllDocumentViewer';
 const path = "http://samples.leanpub.com/thereactnativebook-sample.pdf";
@@ -26,12 +27,13 @@ console.log(props)
       };
   return (
    <>
-      <AllDocViewer
+      {/* <AllDocViewer
       document={props.route.params.source}
       showLeadingNavButton={true}
       onLeadingNavButtonPressed={onLeadingNavButtonPressed}
       
-      />
+      /> */}
+      <PdfViewer data={props.route.params.source}/>
     </>)}
    
 const styles = StyleSheet.create({

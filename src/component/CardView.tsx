@@ -13,7 +13,7 @@ const images = [
 ];
 export const CardViewer = (props: any) => {
     const _renderItem = ({ item, index }) => (
-        <TouchableOpacity style={{ width: scaledSize(117) }} onPress={() => props.onClick(index)}>
+        <TouchableOpacity disabled={index == 1 ? false : true} style={{ width: scaledSize(117) }} onPress={() => props.onClick(index)}>
             <Image
                 source={{ uri: item?.image }}
                 style={styles.pdf}
