@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "421060974099",
+    "project_id": "admob-2a5d6",
+    "storage_bucket": "admob-2a5d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421060974099:android:aa28e712cfa97c947d91e6",
+        "android_client_info": {
+          "package_name": "com.shopax.xreader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421060974099-julsbf3q1ff14bikt4pdc4ku2p0e6sih.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC82Jkmszri7B9TZMwiapKmdM5y6owf6ws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421060974099-julsbf3q1ff14bikt4pdc4ku2p0e6sih.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
