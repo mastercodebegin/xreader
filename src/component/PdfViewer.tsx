@@ -28,7 +28,7 @@ export const PdfViewer = (props:any) => {
               `Password Required!`,
               "",
               [
-                { text: "Ok", onPress: () => {  props.navigation.navigation.dispatch(StackActions.replace('Dashboard')) } }
+                { text: "Ok", onPress: () => {  props.navigation.navigation.goBack() } }
               ]
             );
           }

@@ -22,7 +22,7 @@ export const TimeLinePage = (props: any) => {
         setValue(rowData.id)
         return (
             <View key={rowData.id}>
-                <View style={{borderWidth:1,borderColor:'#fff', backgroundColor: rowData?.reached ?  'green' : '#D3D3D3', height: scaledSize(20), width: scaledSize(20), borderRadius: scaledSize(50), position: 'absolute', left: scaledSize(-34), zIndex: 999, top: scaledSize(-11) }}>
+                <View style={{borderWidth:1,borderColor:'#fff', backgroundColor: rowData?.reached ?  'green' : '#D3D3D3', height: scaledSize(20), width: scaledSize(20), borderRadius: scaledSize(50), position: 'absolute', left: scaledSize(-33), zIndex: 999, top: scaledSize(-11) }}>
 
                 </View>
                 <Text style={{ marginLeft: scaledSize(20), top: scaledSize(-20), fontFamily: FONTS.MerriweatherRegular, fontSize: scaledSize(18), marginTop: scaledSize(5), color: rowData.id == 1 ? '#bc00c6' : rowData.id == 2 ? '#7500ae' : rowData.id == 3 ? '#70009b' : rowData.id == 4 ? '#b50065' : '#5d5d5d' }}>{rowData.location}</Text>
@@ -40,17 +40,17 @@ export const TimeLinePage = (props: any) => {
                 <CustomCard customStyles={styles.cardStyle}>
                     <Timeline
                         data={savedLocations}
-                        eventContainerStyle={{ top: scaledSize(0), alignSelf: 'center' }}
+                        eventContainerStyle={{ top: scaledSize(20), alignSelf: 'center' }}
                         showTime={false}
-                        innerCircle={'dot'}
-                        dotColor={console.log('welcome')}
-                        dotColor={'white'}
-                        dotSize={7}
+                        //innerCircle={'dot'}
+                        //dotColor={console.log('welcome')}
+                        //dotColor={'white'}
+                        dotSize={0}
                         circleColor={COLORS.TRANSPARENT}
                         //circleStyle={{ borderColor: 'white', borderWidth: 2 }}
                         //listViewStyle={{top:scaledSize(15)}}
                         listViewContainerStyle={{ top: scaledSize(10) }}
-                        circleSize={18}
+                        //circleSize={18}
                         lineColor={'#D3D3D3'}
                         renderDetail={renderDetails}
                     />
