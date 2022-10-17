@@ -25,7 +25,7 @@ console.log(props)
       };
   return (
    <>
-      <PdfViewer data={props.route.params.source}/>
+      <PdfViewer data={props.route.params.source} navigation={props}/>
     </>)}
    
 const styles = StyleSheet.create({

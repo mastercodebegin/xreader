@@ -1,14 +1,20 @@
 //@ts-nocheck
-import React from 'react'
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import { StackActions } from '@react-navigation/native';
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, Dimensions, Alert } from 'react-native'
 import Pdf from 'react-native-pdf';
 export const PdfViewer = (props:any) => {
+  const[text,setText] = useState('')
   const [source,setSource] =  React.useState({uri:'http://samples.leanpub.com/thereactnativebook-sample.pdf', cache: true });
   return (
    <>
       <View style={styles.container}>
         <Pdf
         trustAllCerts={false}
+        password={text}
+        onPressLink={(uri) => {
+          console.log(`Link pressed: ${uri}`);
+      }}
           source={{uri: props?.data}}
           onLoadComplete={(numberOfPages, filePath) => {
             console.log(`Number of pages: ${numberOfPages}`);
@@ -17,8 +23,16 @@ export const PdfViewer = (props:any) => {
             console.log(`Current page: ${page}`);
           }}
           onError={(error) => {
-            console.log(error);
-          }}
+            console.log(error,'error')
+            Alert.alert(
+              `Password Required!`,
+              "",
+              [
+                { text: "Ok", onPress: () => {  props.navigation.navigation.dispatch(StackActions.replace('Dashboard')) } }
+              ]
+            );
+          }
+          }
           onPressLink={(uri) => {
             console.log(`Link pressed: ${uri}`);
           }}

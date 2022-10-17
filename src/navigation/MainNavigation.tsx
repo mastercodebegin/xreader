@@ -70,7 +70,7 @@ const MyDrawer: React.FC<myProps> = (props) => {
       initialRouteName="Dashboard"
       drawerStyle={{ width: "60%", backgroundColor: "transparent" }}
     >
-      <Drawer.Screen name="Dashboard" options={{title:''}} component={BottomTabNavigator} />
+      <Drawer.Screen name="Dashboard" options={{title:'',headerStyle:{backgroundColor:'orange'}}} component={BottomTabNavigator} />
       {/* <Drawer.Screen name="subscription" component={SubscriptionNavigator} /> */}
     </Drawer.Navigator>
   );

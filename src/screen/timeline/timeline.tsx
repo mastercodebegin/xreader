@@ -9,11 +9,11 @@ import { COLORS } from '../../utilies/GlobalColors';
 import { FONTS } from '../../utilies/GlobalFonts';
 
 const savedLocations = [
-    { id: 1, location: 'QUICKSTER', time: '02-10-2022', type: 'Update your location every minutes' },
-    { id: 2, location: 'DASHER', time: '02-10-2022', type: 'Update your location every 3 minutes' },
-    { id: 3, location: 'IM COMING', time: '02-10-2022', type: 'Update your location every 5 minutes' },
-    { id: 4, location: 'FASHIONABLY LATE', time: '02-10-2022', type: 'Update your location every 15 minutes' },
-    { id: 5, location: 'GHOST MODE', time: '02-10-2022', type: 'Your location stops being updated' }
+    { id: 1, reached: true, location: 'QUICKSTER', time: '02-10-2022', type: 'Update your location every minutes' },
+    { id: 2, reached: true, location: 'DASHER', time: '02-10-2022', type: 'Update your location every 3 minutes' },
+    { id: 3, reached: false, location: 'IM COMING', time: '02-10-2022', type: 'Update your location every 5 minutes' },
+    { id: 4, reached: false, location: 'FASHIONABLY LATE', time: '02-10-2022', type: 'Update your location every 15 minutes' },
+    { id: 5, reached: false, location: 'GHOST MODE', time: '02-10-2022', type: 'Your location stops being updated' }
 ]
 const { width, height } = Dimensions.get('window')
 export const TimeLinePage = (props: any) => {
@@ -22,7 +22,10 @@ export const TimeLinePage = (props: any) => {
         setValue(rowData.id)
         return (
             <View key={rowData.id}>
-                <Text style={{ marginLeft: scaledSize(20), top: scaledSize(-13), fontFamily: FONTS.MerriweatherRegular, fontSize: scaledSize(18), marginTop: scaledSize(5), color: rowData.id == 1 ? '#bc00c6' : rowData.id == 2 ? '#7500ae' : rowData.id == 3 ? '#70009b' : rowData.id == 4 ? '#b50065' : '#5d5d5d' }}>{rowData.location}</Text>
+                <View style={{borderWidth:1,borderColor:'#fff', backgroundColor: rowData?.reached ?  'green' : '#D3D3D3', height: scaledSize(20), width: scaledSize(20), borderRadius: scaledSize(50), position: 'absolute', left: scaledSize(-34), zIndex: 999, top: scaledSize(-11) }}>
+
+                </View>
+                <Text style={{ marginLeft: scaledSize(20), top: scaledSize(-20), fontFamily: FONTS.MerriweatherRegular, fontSize: scaledSize(18), marginTop: scaledSize(5), color: rowData.id == 1 ? '#bc00c6' : rowData.id == 2 ? '#7500ae' : rowData.id == 3 ? '#70009b' : rowData.id == 4 ? '#b50065' : '#5d5d5d' }}>{rowData.location}</Text>
                 <Text style={{ marginLeft: scaledSize(20), fontFamily: FONTS.MerriweatherRegular, marginTop: scaledSize(2), color: '#5d5d5d', top: scaledSize(-10) }}>{rowData.type}</Text>
                 <Text style={{ marginLeft: scaledSize(20), fontFamily: 'Quicksand-Medium', marginTop: scaledSize(0), marginRight: scaledSize(5), bottom: scaledSize(5) }}>{''}</Text>
             </View>
@@ -40,15 +43,15 @@ export const TimeLinePage = (props: any) => {
                         eventContainerStyle={{ top: scaledSize(0), alignSelf: 'center' }}
                         showTime={false}
                         innerCircle={'dot'}
-                        dotColor={'#f000f9'}
-                        //dotColor={'#2a2a2a'}
-                        dotSize={16}
-                        circleColor={'#2a2a2a'}
-                        circleStyle={{ borderColor: 'white', borderWidth: 2 }}
+                        dotColor={console.log('welcome')}
+                        dotColor={'white'}
+                        dotSize={7}
+                        circleColor={COLORS.TRANSPARENT}
+                        //circleStyle={{ borderColor: 'white', borderWidth: 2 }}
                         //listViewStyle={{top:scaledSize(15)}}
                         listViewContainerStyle={{ top: scaledSize(10) }}
-                        circleSize={40}
-                        lineColor={'#f4f3f6'}
+                        circleSize={18}
+                        lineColor={'#D3D3D3'}
                         renderDetail={renderDetails}
                     />
                 </CustomCard>
@@ -59,7 +62,7 @@ export const TimeLinePage = (props: any) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#2a2a2a',
+        backgroundColor: 'grey',
         //justifyContent: 'flex-start',
         //marginLeft: scaledSize(20),
         //marginRight: scaledSize(20)
@@ -70,7 +73,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#2a2a2a',
         borderRadius: scaledSize(10),
         width: '90%',
+        elevation:10,
         height: height - scaledSize(110),
+        marginBottom: scaledSize(65),
         fontFamily: 'Quicksand-Bold',
         textAlign: 'center',
         margin: deviceBasedDynamicDimension(20, true, 1),

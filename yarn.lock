@@ -6237,6 +6237,11 @@ regjsparser@^0.7.0:
   dependencies:
     jsesc "~0.5.0"
 
+remove-pdf-password@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/remove-pdf-password/-/remove-pdf-password-0.1.0.tgz#ab5c0bd34300f7b4593e2ac258bc980aba38048f"
+  integrity sha512-kJQ+99Zm1sPdCqogU/QjCLQ1qYCaxckJD9ZdNUAsqNaIb+sgnPfphc0etoT200z+7KfzKOy5kWzGOx2pO51RDw==
+
 remove-trailing-separator@^1.0.1:
   version "1.1.0"
   resolved "https://registry.npmjs.org/remove-trailing-separator/-/remove-trailing-separator-1.1.0.tgz"

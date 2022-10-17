@@ -11,6 +11,7 @@ import Otp from "../screen/testprogram/Otp"
 import Swiper from "../helper/SwiperComponent"
 import { AllDocViewerPage } from "../screen/documents/AllDocViewerPage"
 import { DrawerNavigator } from "./MainNavigation"
+import { PdfViewer } from "../component/PdfViewer"
 const Stack = createStackNavigator();
 
 
@@ -20,7 +21,7 @@ export default StackNavigator = () => {
   
     return (
       <Stack.Navigator initialRouteName={'Dashboard'} 
-      screenOptions={{ headerShown: false, gestureEnabled: false, 
+      screenOptions={{ headerShown: false, gestureEnabled: true, headerStyle:{backgroundColor:'#fff',elevation:10,borderBottomWidth:1},
        ...(Platform.OS === "android" && TransitionPresets.SlideFromRightIOS), }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
