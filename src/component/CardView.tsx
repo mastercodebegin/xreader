@@ -51,8 +51,8 @@ export const CardViewer = (props: any) => {
         };
     }, [])
 
-    const _renderItem = ({ item, index }) => (
-        <TouchableOpacity key={index} style={{alignSelf:'center',flex:1,justifyContent:'center',marginTop:scaledSize(0)}} onPress={() => {
+    const _renderItem = ({ item, index }) => {
+       return <TouchableOpacity key={index} style={{alignSelf:'center',flex:1,justifyContent:'center',marginTop:scaledSize(0)}} onPress={() => {
             let value = [...images]
             if (item.count < 4) {
                 value.map((int) => {
@@ -74,11 +74,11 @@ export const CardViewer = (props: any) => {
             />
             {/* <Text style={{ textAlign: 'center', marginBottom: scaledSize(15), color: 'grey', fontSize: 13, fontFamily: FONTS.MerriweatherRegular, top: scaledSize(-5) }}>{item?.name}</Text> */}
         </TouchableOpacity>
-    );
+    };
     return (
         <View style={{ flex: 1, marginTop: scaledSize(5), width: '100%', marginLeft: scaledSize(0),marginBottom:scaledSize(70) }}>
             <FlatList
-                keyExtractor={(index) => index.toString()}
+                keyExtractor={(index) => index?.id?.toString()}
                 data={data}
                 numColumns={2}
                 renderItem={_renderItem}
