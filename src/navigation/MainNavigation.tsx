@@ -27,7 +27,7 @@ export const DrawerNavigator: React.FC<myProps> = (props) => {
   return (
     <MainStack.Navigator>
       <MainStack.Screen
-        name="Dashboard"
+        name="Home"
         options={{ headerShown: false }}
         component={MyDrawer}
       />
@@ -67,10 +67,10 @@ const MyDrawer: React.FC<myProps> = (props) => {
     <Drawer.Navigator
     screenOptions={{headerShown:false}}
       drawerContent={(props) => {}}
-      initialRouteName="Dashboard"
+      initialRouteName="Home1"
       drawerStyle={{ width: "60%", backgroundColor: "transparent" }}
     >
-      <Drawer.Screen name="Dashboard" options={{title:'',headerStyle:{backgroundColor:'orange'}}} component={BottomTabNavigator} />
+      <Drawer.Screen name="Home1" options={{title:'',headerStyle:{backgroundColor:'orange'}}} component={BottomTabNavigator} />
       {/* <Drawer.Screen name="subscription" component={SubscriptionNavigator} /> */}
     </Drawer.Navigator>
   );
@@ -102,20 +102,13 @@ const LandingNavigator: React.FC<myProps> = (props) => {
 
 const styles = StyleSheet.create({
   backImgStyle: {
-    //width: deviceBasedDynamicDimension(25, true, 1),
-   // height: deviceBasedDynamicDimension(25, false, 1),
     opacity: 1,
-    // resizeMode: "contain",
   },
   btnContainer: {
-   // marginLeft: deviceBasedDynamicDimension(10, false, 1),
   },
   image_SearchImage: {
-    //width: deviceBasedDynamicDimension(24, true, 1),
-   // height: deviceBasedDynamicDimension(24, false, 1),
+   
     opacity: 1,
-    // resizeMode: "contain",
-  //  marginRight: deviceBasedDynamicDimension(10, false, 1),
-   // color: COLORS.primaryShadow,
+   
   },
 });

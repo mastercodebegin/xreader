@@ -9,7 +9,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { scaledSize } from '../helper/util/Utilities';
 import { useIsFocused } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { Camera, Files, Home, Settings, Time, Tools } from '../utilies/GlobalImages';
+import { AppBG, Camera, Files, Home, Settings, Time, Tools } from '../utilies/GlobalImages';
 import { TimeLinePage } from '../screen/timeline/timeline';
 const ScannerView = () =>{
   return (
@@ -27,11 +27,15 @@ const SettingsView = () =>{
   )
 }
 const screensData = [
-  { name: 'Files', focus: Files, unfocus: Files, component: CardViewerPage },
+  { name: 'Home', focus: Files, unfocus: Files, component: CardViewerPage },
   { name: 'Tools', focus: Tools, unfocus: Tools, component: TimeLinePage },
   { name: 'Scanner', focus: Camera, unfocus: Camera, component: ScannerView },
   { name: 'Settings', focus: Settings, unfocus: Settings, component: SettingsView }
 ]
+// { name: 'Home', focus: Files, unfocus: Files, component: CardViewerPage },
+// { name: 'Support', focus: Camera, unfocus: Camera, component: ScannerView },
+// { name: 'What Next', focus: Settings, unfocus: Settings, component: SettingsView }
+
 export default BottomTabsNavigator = () => {
   const [cartData, setCartData] = useState(0)
   const isFocused = useIsFocused();
@@ -68,6 +72,7 @@ export default BottomTabsNavigator = () => {
   }
   const BottomTabs = createBottomTabNavigator()
   return (
+    // <ImageBackground source={AppBG} resizeMode='contain'>
     <BottomTabs.Navigator screenOptions={{ headerShown: false, tabBarStyle: styles.bottomTabStyle, tabBarHideOnKeyboard: true }}>
       {screensData.map((item, key) =>
         <BottomTabs.Screen key={key} name={item.name} component={item.component}
@@ -77,7 +82,7 @@ export default BottomTabsNavigator = () => {
                 <Image resizeMode='contain' resizeMethod='resize' source={item.unfocus} style={[styles.tabbarIcon, { top: scaledSize(0), left: scaledSize(0) }]} />
                 :
                 <Image resizeMode='contain' resizeMethod='resize' source={item.unfocus} style={[styles.tabbarIcon, { top: scaledSize(0), left: scaledSize(0) }]} />
-            ),
+                ),
 
             tabBarLabel: ({ focused }) => (
               <Text style={{ fontSize: item.name == 'Booking History' ? 7 : 9, color: focused ? COLORS.black : COLORS.grey, fontWeight: '200', top: focused ? scaledSize(-2) : scaledSize(-2), left: scaledSize(1), marginBottom: scaledSize(6), fontFamily: FONTS.MerriweatherBold }}>{item?.name}</Text>
@@ -85,14 +90,15 @@ export default BottomTabsNavigator = () => {
           }}
         />)}
     </BottomTabs.Navigator>
+    // </ImageBackground>
   );
 
 }
 
 const styles = StyleSheet.create({
-  bottomWrapper: { flex: 1, backgroundColor: COLORS.white },
+  bottomWrapper: { flex: 1,  },
   bottomTabStyle: {
-    backgroundColor: '#fff',
+    // backgroundColor: 'tra',
     position: 'absolute',
     borderTopWidth: 0.5,
     elevation: 10,

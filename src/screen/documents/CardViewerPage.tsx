@@ -1,11 +1,12 @@
 //@ts-nocheck
 import React from 'react'
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, ImageBackground } from 'react-native'
 import DocumentPicker from 'react-native-document-picker';
 import { CardViewer } from '../../component/CardView';
 import { scaledSize } from '../../helper/util/Utilities';
 import { removePdfPassword } from 'remove-pdf-password'
 import { BannerAd, BannerAdSize, TestIds } from '@react-native-firebase/admob';
+import { AppBG } from '../../utilies/GlobalImages';
 export const CardViewerPage = (props: any) => {
     const openFile = async (value: any) => {
         try {
@@ -23,15 +24,34 @@ export const CardViewerPage = (props: any) => {
             // 	);
         }
         catch (e) {
-            alert('No file Selected')
+            // alert('No file Selected')
         }
     }
     return (
-        <View style={styles.container}>
-            <View style={{ position: 'absolute', bottom: scaledSize(70), alignSelf: 'center', zIndex: 999 }}>
+        <ImageBackground
+        source={AppBG}
+        style={{width:'100%',height:'100%'}}>
+        <View style={[styles.container,]}>
+            <View style={{flex:.5,flexDirection:'row',}}>
+<View style={{flex:.5,}}>
+
+</View>
+<View style={{flex:.5,}}>
+
+</View>
+
+            </View>
+            {/* <View style={{ flex:1,}}> */}
+            
+            <View style={{flex:.6,alignItems:'center',justifyContent:'center'}}>
+
+            <CardViewer onClick={openFile} />
+            </View>
+            <View style={{flex:.22,alignItems:'center'}}>
+
                 <BannerAd
                     unitId={TestIds.BANNER}
-                    size={BannerAdSize.BANNER}
+                    size={BannerAdSize.LARGE_BANNER}
                     requestOptions={{
                         requestNonPersonalizedAdsOnly: true,
                     }}
@@ -42,19 +62,20 @@ export const CardViewerPage = (props: any) => {
                         console.error('Advert failed to load: ', error);
                     }}
                 />
+                </View>
+            <View style={{height:80,}}></View>
             </View>
-            <View style={{ backgroundColor: 'white', height: scaledSize(150), elevation: 2 }}>
-            </View>
-            <CardViewer onClick={openFile} />
-        </View>
+            
+        {/* </View> */}
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
-        justifyContent: 'center',
+        // backgroundColor: 'white',
+        // justifyContent: 'center',
         //marginLeft: scaledSize(20),
         //marginRight: scaledSize(20)
         // alignItems: 'center'

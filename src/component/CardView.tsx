@@ -1,17 +1,17 @@
 //@ts-nocheck
 import { AdEventType, RewardedAdEventType } from '@react-native-firebase/admob';
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, Dimensions, FlatList, Image, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, FlatList, Image, TouchableOpacity, ImageBackground } from 'react-native'
 import { scaledSize } from '../helper/util/Utilities';
 import { FONTS } from '../utilies/GlobalFonts'
-import { Pdf1, Pdf2, Pdf3 } from '../utilies/GlobalImages';
+import { PowerpointBG,PdfBG,PdfIcon,WordBG,ExcelBG,WordIcon,ExcelIcon,AcrobatIcon,PowerpointIcon} from '../utilies/GlobalImages';
 import { rewardInterstitialAd } from './Admob';
 
 const images = [
-    { image: Pdf1, name: 'doc', count: 0, id: 1 },
-    { image: Pdf2, name: 'pdf', count: 0, id: 2 },
-    { image: Pdf1, name: 'excel', count: 0, id: 3 },
-    { image: Pdf2, name: 'ppt', count: 0, id: 4 }
+    { image: PdfBG,icon:PdfIcon, name: 'doc', count: 0, id: 1 },
+    { image: WordBG, icon:WordIcon,name: 'pdf', count: 0, id: 2 },
+    { image: ExcelBG, icon:ExcelIcon,name: 'excel', count: 0, id: 3 },
+    { image: PowerpointBG, icon:PowerpointIcon,name: 'ppt', count: 0, id: 4 }
 ];
 export const CardViewer = (props: any) => {
     const [data, setData] = useState(images)
@@ -52,7 +52,9 @@ export const CardViewer = (props: any) => {
     }, [])
 
     const _renderItem = ({ item, index }) => {
-       return <TouchableOpacity key={index} style={{alignSelf:'center',flex:1,justifyContent:'center',marginTop:scaledSize(0)}} onPress={() => {
+        return <View style={{flex:1,justifyContent:'flex-end',
+        alignItems:'center',marginTop:scaledSize(10)}}>
+        <TouchableOpacity key={index} style={{alignSelf:'center',}} onPress={() => {
             let value = [...images]
             if (item.count < 4) {
                 value.map((int) => {
@@ -67,16 +69,28 @@ export const CardViewer = (props: any) => {
                 rewardInterstitialAd.show();
             }
         }}>
-            <Image
+
+           {/* <Text>{item.name}</Text> */}
+            <ImageBackground
                 source={item?.image}
-                style={styles.pdf}
+                style={[styles.pdf,{
+               }]}
                 resizeMode="cover"
+            >
+                <Image
+                source={item?.icon}
+                style={[styles.pdf,{alignSelf:'center',height:item?.id==1?'60%':'70%'}]}
+                resizeMode="center"
             />
+
+            </ImageBackground>
             {/* <Text style={{ textAlign: 'center', marginBottom: scaledSize(15), color: 'grey', fontSize: 13, fontFamily: FONTS.MerriweatherRegular, top: scaledSize(-5) }}>{item?.name}</Text> */}
         </TouchableOpacity>
+        </View>
+       
     };
     return (
-        <View style={{ flex: 1, marginTop: scaledSize(5), width: '100%', marginLeft: scaledSize(0),marginBottom:scaledSize(70) }}>
+        <View style={{ flex: 1, marginTop: scaledSize(5), width: '100%', marginLeft: scaledSize(0), }}>
             <FlatList
                 keyExtractor={(index) => index?.id?.toString()}
                 data={data}
@@ -90,21 +104,22 @@ export const CardViewer = (props: any) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        marginTop: scaledSize(25),
+        // justifyContent: 'flex-start',
+        // alignItems: 'center',
+        // marginTop: scaledSize(25),
     },
     row: {
         flex: 1,
         justifyContent: "space-around"
     },
     pdf: {
-        height: scaledSize(115),
+        height: scaledSize(110),
         width: scaledSize(175),
         alignSelf: 'center',
-        borderRadius: scaledSize(10),
-        margin: scaledSize(10),
-        //backgroundColor:'#f2f5ff'
-        //margin: scaledSize(20)
+        borderRadius: scaledSize(8),
+        overflow:'hidden',
+        justifyContent:'center',
+        alignItems:'center'
+        
     }
 });
