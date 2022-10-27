@@ -6,14 +6,35 @@ import { CardViewer } from '../../component/CardView';
 import { scaledSize } from '../../helper/util/Utilities';
 import { removePdfPassword } from 'remove-pdf-password'
 import { BannerAd, BannerAdSize, TestIds } from '@react-native-firebase/admob';
+import RNImageToPdf from 'react-native-image-to-pdf';
 import { AppBG } from '../../utilies/GlobalImages';
 export const CardViewerPage = (props: any) => {
     const openFile = async (value: any) => {
         try {
             const res = await DocumentPicker.pick({
-                type: [value == 0 ? DocumentPicker.types.docx : value == 1 ? DocumentPicker.types.pdf : value == 2 ? DocumentPicker.types.xlsx : value == 3 ? DocumentPicker.types.ppt : value == 4 ? DocumentPicker.types.video : value == 5 ? DocumentPicker.types.images : DocumentPicker.types.allFiles]
+                type: [value == 0 ? DocumentPicker.types.pdf : value == 1 ? DocumentPicker.types.docx : value == 2 ? DocumentPicker.types.xlsx : value == 3 ? DocumentPicker.types.ppt : value == 4 ? DocumentPicker.types.pdf : value == 5 ? DocumentPicker.types.images : DocumentPicker.types.allFiles]
             });
-            console.log(res, '------------------');
+            if(value == 5){
+                console.log(value)
+             try {
+                const options = {
+                    imagePaths: [res[0]?.uri],
+                    name: 'PDFName',
+                    maxSize: { // optional maximum image dimension - larger images will be resized
+                        width: 900,
+                        height: Math.round(Dimensions.get('window').height/ Dimensions.get('window').width * 900),
+                    },
+                    quality: .7, // optional compression paramter
+                };
+                const pdf = await RNImageToPdf.createPDFbyImages(options);
+                props.navigation.navigate('AllDocumentView', { source: pdf.filePath,props:props })
+                console.log(pdf.filePath);
+            } catch(e) {
+                console.log(e);
+            }
+        }
+        else{
+            console.log(res,value, '------------------');
             const data = { uri: res[0]?.uri, cache: true }
             props.navigation.navigate('AllDocumentView', { source: res[0]?.uri,props:props })
             //setSource(res[0]?.uri);
@@ -22,6 +43,7 @@ export const CardViewerPage = (props: any) => {
             // }
             // 	).catch((err)=>console.log('Error',err)
             // 	);
+        }
         }
         catch (e) {
             // alert('No file Selected')

@@ -4,14 +4,16 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, Dimensions, FlatList, Image, TouchableOpacity, ImageBackground } from 'react-native'
 import { scaledSize } from '../helper/util/Utilities';
 import { FONTS } from '../utilies/GlobalFonts'
-import { PowerpointBG,PdfBG,PdfIcon,WordBG,ExcelBG,WordIcon,ExcelIcon,AcrobatIcon,PowerpointIcon} from '../utilies/GlobalImages';
+import { PowerpointBG,PdfBG,PdfIcon,WordBG,ExcelBG,WordIcon,ExcelIcon,AcrobatIcon,PowerpointIcon, Images} from '../utilies/GlobalImages';
 import { rewardInterstitialAd } from './Admob';
 
 const images = [
     { image: PdfBG,icon:PdfIcon, name: 'doc', count: 0, id: 1 },
     { image: WordBG, icon:WordIcon,name: 'pdf', count: 0, id: 2 },
     { image: ExcelBG, icon:ExcelIcon,name: 'excel', count: 0, id: 3 },
-    { image: PowerpointBG, icon:PowerpointIcon,name: 'ppt', count: 0, id: 4 }
+    { image: PowerpointBG, icon:PowerpointIcon,name: 'ppt', count: 0, id: 4 },
+    { image: AcrobatIcon, icon:AcrobatIcon,name: 'images', count: 0, id: 5 },
+    { image: WordBG, icon:Images,name: 'images', count: 0, id: 6 }
 ];
 export const CardViewer = (props: any) => {
     const [data, setData] = useState(images)
