@@ -35,13 +35,13 @@ const ModalView = (props: myProps) => {
                         width: scaledSize(300),
                         borderColor: COLORS.grey,
                         borderWidth: 0,
-                        backgroundColor: "#1f1646",
-                        borderRadius: scaledSize(10),
+                        backgroundColor: "#fff",
+                        borderRadius: scaledSize(5),
                         opacity: 0.9,
                         height: scaledSize(210)
                     }}>
-                        <View style={{ backgroundColor: '#1f1646', borderRadius: scaledSize(10), height: scaledSize(200) }}>
-                            <Text style={{ margin: scaledSize(10), fontSize: scaledSize(17), textAlign: 'center', color: 'white', fontFamily: 'Quicksand-Medium' }}>This File is Protected!</Text>
+                        <View style={{ backgroundColor: '#fff', borderRadius: scaledSize(5), height: scaledSize(200) }}>
+                            <Text style={{ margin: scaledSize(10), fontSize: scaledSize(17), textAlign: 'center', color: 'black', fontFamily: 'Quicksand-Medium' }}>This File is Protected!</Text>
                             <View style={{ backgroundColor: '#fff', width: '83%', alignSelf: 'center', margin: scaledSize(10), borderRadius: scaledSize(5) }}>
                                 <TextInput
                                     value={props.text}
@@ -50,9 +50,9 @@ const ModalView = (props: myProps) => {
                                     keyboardType='name-phone-pad'
                                     placeholderTextColor="black"
                                     onChangeText={(value: any) => props.onText(value)}
-                                    style={{ marginLeft: scaledSize(5), borderRadius: scaledSize(5), color: 'black', borderColor: 'grey', borderWidth: 0, fontSize: scaledSize(14), padding: scaledSize(5), paddingLeft: scaledSize(10) }} />
+                                    style={{ marginLeft: scaledSize(5), borderRadius: scaledSize(5), color: 'black', borderColor: 'grey', borderWidth: 0.5, fontSize: scaledSize(14), padding: scaledSize(5), paddingLeft: scaledSize(10) }} />
                             </View>
-                            {props.text.length == 0 && <Text style={{ textAlign: 'left', color: 'red', left: scaledSize(25) }}>Enter Password</Text>}
+                            {props.text.length == 0 && <Text style={{ textAlign: 'center', color: 'red' }}>Enter Password</Text>}
                             {props.num > 1 && props.text.length > 0 && <Text style={{ textAlign: 'center', color: 'red' }}>Wrong Password</Text>}
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                 <TouchableOpacity onPress={props.onOpen}
