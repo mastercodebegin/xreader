@@ -10,7 +10,7 @@ import { FONTS } from '../../utilies/GlobalFonts';
 
 const savedLocations = [
     { id: 1, reached: true, location: 'QUICKSTER', time: '02-10-2022', type: 'Update your location every minutes' },
-    { id: 2, reached: true, location: 'DASHER', time: '02-10-2022', type: 'Update your location every 3 minutes' },
+    { id: 2, reached: false, location: 'DASHER', time: '02-10-2022', type: 'Update your location every 3 minutes' },
     { id: 3, reached: false, location: 'IM COMING', time: '02-10-2022', type: 'Update your location every 5 minutes' },
     { id: 4, reached: false, location: 'FASHIONABLY LATE', time: '02-10-2022', type: 'Update your location every 15 minutes' },
     { id: 5, reached: false, location: 'GHOST MODE', time: '02-10-2022', type: 'Your location stops being updated' }
@@ -62,7 +62,7 @@ export const TimeLinePage = (props: any) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'grey',
+        backgroundColor: '#fff',
         //justifyContent: 'flex-start',
         //marginLeft: scaledSize(20),
         //marginRight: scaledSize(20)
@@ -70,10 +70,10 @@ const styles = StyleSheet.create({
     },
     cardStyle: {
         flexDirection: 'column',
-        backgroundColor: '#2a2a2a',
+        backgroundColor: COLORS.TRANSPARENT,
         borderRadius: scaledSize(10),
         width: '90%',
-        elevation:10,
+        elevation:0,
         height: height - scaledSize(110),
         marginBottom: scaledSize(65),
         fontFamily: 'Quicksand-Bold',

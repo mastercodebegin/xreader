@@ -4,9 +4,12 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, Dimensions, Alert, Modal, TouchableOpacity, TextInput } from 'react-native'
 import Pdf from 'react-native-pdf';
 import { scaledSize } from '../helper/util/Utilities';
+import Share from 'react-native-share';
 import { deviceBasedDynamicDimension } from '../helper/util/scale';
 import { COLORS } from "../utilies/GlobalColors";
 import ModalView from './modalView';
+import CustomeButton from './CustomeButton';
+import { Button } from 'react-native-elements';
 export const PdfViewer = (props: any) => {
   const [text, setText] = useState('')
   const [num, setNumber] = useState(0)
@@ -16,7 +19,12 @@ export const PdfViewer = (props: any) => {
     setVisible(false)
     setNumber(0)
   }, [])
-
+ const onAndroidSharePress = () => Share.open({
+  title: "This is my file ",
+  subject: "Pdf File",
+  url:`file://${props?.data}`,message:'CLICK'
+});
+ 
   const add = (value:any)=>{
     setText(value.replace(/[^a-zA-Z0-9 ]/g, "").replace(" ", ""))
   }
@@ -52,6 +60,7 @@ export const PdfViewer = (props: any) => {
               console.log(`Link pressed: ${uri}`);
             }}
             style={styles.pdf} />
+       
           :
           <ModalView
             visible={visible}
@@ -66,6 +75,7 @@ export const PdfViewer = (props: any) => {
             close={'CLOSE'}
             open={'OPEN'} />
         }
+        <Button onPress={()=>onAndroidSharePress()} containerStyle={{width:scaledSize(100),height:scaledSize(80),top:scaledSize(10)}} title={'Share'}/>
       </View>
     </>)
 }
@@ -75,7 +85,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: 25,
+    marginTop: scaledSize(25),
+    //marginBottom:150
   },
   pdf: {
     flex: 1,
