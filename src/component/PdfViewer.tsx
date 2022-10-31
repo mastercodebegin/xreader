@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { StackActions } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, Dimensions, Alert, Modal, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, Alert, Modal, TouchableOpacity, TextInput, Linking } from 'react-native'
 import Pdf from 'react-native-pdf';
 import { scaledSize } from '../helper/util/Utilities';
 import Share from 'react-native-share';
@@ -19,10 +19,10 @@ export const PdfViewer = (props: any) => {
     setVisible(false)
     setNumber(0)
   }, [])
- const onAndroidSharePress = () => Share.open({
+ const onAndroidSharePress = async() => await Share.open({
   title: "This is my file ",
   subject: "Pdf File",
-  url:`file://${props?.data}`,message:'CLICK'
+  message:`file://${props?.data}`
 });
  
   const add = (value:any)=>{
@@ -75,7 +75,7 @@ export const PdfViewer = (props: any) => {
             close={'CLOSE'}
             open={'OPEN'} />
         }
-        <Button onPress={()=>onAndroidSharePress()} containerStyle={{width:scaledSize(100),height:scaledSize(80),top:scaledSize(10)}} title={'Share'}/>
+        <Button onPress={()=>Linking.openURL(`file://${props?.data}`)} containerStyle={{width:scaledSize(100),height:scaledSize(80),top:scaledSize(10)}} title={'Share'}/>
       </View>
     </>)
 }

@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity, ImageBackground } from 'react-native'
 import DocumentPicker from 'react-native-document-picker';
 import { CardViewer } from '../../component/CardView';
@@ -9,41 +9,50 @@ import { BannerAd, BannerAdSize, TestIds } from '@react-native-firebase/admob';
 import RNImageToPdf from 'react-native-image-to-pdf';
 import { AppBG } from '../../utilies/GlobalImages';
 export const CardViewerPage = (props: any) => {
+   // const [photoArray, setPhotoArray] = useState([])
     const openFile = async (value: any) => {
         try {
-            const res = await DocumentPicker.pick({
-                type: [value == 0 ? DocumentPicker.types.pdf : value == 1 ? DocumentPicker.types.docx : value == 2 ? DocumentPicker.types.xlsx : value == 3 ? DocumentPicker.types.ppt : value == 4 ? DocumentPicker.types.pdf : value == 5 ? DocumentPicker.types.images : DocumentPicker.types.allFiles]
-            });
-            if(value == 5){
-                console.log(value)
-             try {
-                const options = {
-                    imagePaths: [res[0]?.uri],
-                    name: 'PDFName',
-                    maxSize: { // optional maximum image dimension - larger images will be resized
-                        width: 900,
-                        height: Math.round(Dimensions.get('window').height/ Dimensions.get('window').width * 900),
-                    },
-                    quality: .7, // optional compression paramter
-                };
-                const pdf = await RNImageToPdf.createPDFbyImages(options);
-                props.navigation.navigate('AllDocumentView', { source: pdf.filePath,props:props })
-                console.log(pdf.filePath);
-            } catch(e) {
-                console.log(e);
+            if (value == 5) {
+                const res = await DocumentPicker.pickMultiple({
+                    type: [value == 0 ? DocumentPicker.types.pdf : value == 1 ? DocumentPicker.types.docx : value == 2 ? DocumentPicker.types.xlsx : value == 3 ? DocumentPicker.types.ppt : value == 4 ? DocumentPicker.types.pdf : value == 5 ? DocumentPicker.types.images : DocumentPicker.types.allFiles]
+                });
+                let arr = []
+                res.map((item)=>{
+                    let obj = item.uri
+                    arr.push(obj)
+                })
+                console.log(arr,res, '------------------');
+                try {
+                    const options = {
+                        imagePaths: arr,
+                        name: res[0].size?.toString(),
+                        maxSize: { // optional maximum image dimension - larger images will be resized
+                            width: 900,
+                            height: Math.round(Dimensions.get('window').height / Dimensions.get('window').width * 900),
+                        },
+                        quality: .7, // optional compression paramter
+                    };
+                    const pdf = await RNImageToPdf.createPDFbyImages(options);
+                    props.navigation.navigate('AllDocumentView', { source: pdf.filePath, props: props })
+                    console.log(pdf.filePath,'pdf path');
+                } catch (e) {
+                    console.log(e);
+                }
             }
-        }
-        else{
-            console.log(res,value, '------------------');
-            const data = { uri: res[0]?.uri, cache: true }
-            props.navigation.navigate('AllDocumentView', { source: res[0]?.uri,props:props })
-            //setSource(res[0]?.uri);
-            // setImage(encoded)
-            // await FileViewer.open(res[0]?.uri).then(()=>{console.log('sucesss')
-            // }
-            // 	).catch((err)=>console.log('Error',err)
-            // 	);
-        }
+            else {
+                const res = await DocumentPicker.pick({
+                    type: [value == 0 ? DocumentPicker.types.pdf : value == 1 ? DocumentPicker.types.docx : value == 2 ? DocumentPicker.types.xlsx : value == 3 ? DocumentPicker.types.ppt : value == 4 ? DocumentPicker.types.pdf : value == 5 ? DocumentPicker.types.images : DocumentPicker.types.allFiles]
+                });
+                console.log(res, value, '------------------');
+                const data = { uri: res[0]?.uri, cache: true }
+                props.navigation.navigate('AllDocumentView', { source: res[0]?.uri, props: props })
+                //setSource(res[0]?.uri);
+                // setImage(encoded)
+                // await FileViewer.open(res[0]?.uri).then(()=>{console.log('sucesss')
+                // }
+                // 	).catch((err)=>console.log('Error',err)
+                // 	);
+            }
         }
         catch (e) {
             // alert('No file Selected')
@@ -51,44 +60,44 @@ export const CardViewerPage = (props: any) => {
     }
     return (
         <ImageBackground
-        source={AppBG}
-        style={{width:'100%',height:'100%'}}>
-        <View style={[styles.container,]}>
-            <View style={{flex:.5,flexDirection:'row',}}>
-<View style={{flex:.5,}}>
+            source={AppBG}
+            style={{ width: '100%', height: '100%' }}>
+            <View style={[styles.container,]}>
+                <View style={{ flex: .5, flexDirection: 'row', }}>
+                    <View style={{ flex: .5, }}>
 
-</View>
-<View style={{flex:.5,}}>
+                    </View>
+                    <View style={{ flex: .5, }}>
 
-</View>
+                    </View>
 
-            </View>
-            {/* <View style={{ flex:1,}}> */}
-            
-            <View style={{flex:.6,alignItems:'center',justifyContent:'center'}}>
-
-            <CardViewer onClick={openFile} />
-            </View>
-            <View style={{flex:.22,alignItems:'center'}}>
-
-                <BannerAd
-                    unitId={TestIds.BANNER}
-                    size={BannerAdSize.LARGE_BANNER}
-                    requestOptions={{
-                        requestNonPersonalizedAdsOnly: true,
-                    }}
-                    onAdLoaded={() => {
-                        console.log('Advert loaded');
-                    }}
-                    onAdFailedToLoad={(error) => {
-                        console.error('Advert failed to load: ', error);
-                    }}
-                />
                 </View>
-            <View style={{height:80,}}></View>
+                {/* <View style={{ flex:1,}}> */}
+
+                <View style={{ flex: .6, alignItems: 'center', justifyContent: 'center' }}>
+
+                    <CardViewer onClick={openFile} />
+                </View>
+                <View style={{ flex: .22, alignItems: 'center' }}>
+
+                    <BannerAd
+                        unitId={TestIds.BANNER}
+                        size={BannerAdSize.LARGE_BANNER}
+                        requestOptions={{
+                            requestNonPersonalizedAdsOnly: true,
+                        }}
+                        onAdLoaded={() => {
+                            console.log('Advert loaded');
+                        }}
+                        onAdFailedToLoad={(error) => {
+                            console.error('Advert failed to load: ', error);
+                        }}
+                    />
+                </View>
+                <View style={{ height: 80, }}></View>
             </View>
-            
-        {/* </View> */}
+
+            {/* </View> */}
         </ImageBackground>
     )
 }
