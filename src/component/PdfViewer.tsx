@@ -1,10 +1,10 @@
 //@ts-nocheck
 import { StackActions } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, Dimensions, Alert, Modal, TouchableOpacity, TextInput, Linking } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, Alert, Share, Modal, TouchableOpacity, TextInput, Linking } from 'react-native'
 import Pdf from 'react-native-pdf';
 import { scaledSize } from '../helper/util/Utilities';
-import Share from 'react-native-share';
+//import Share from 'react-native-share';
 import { deviceBasedDynamicDimension } from '../helper/util/scale';
 import { COLORS } from "../utilies/GlobalColors";
 import ModalView from './modalView';
@@ -19,13 +19,15 @@ export const PdfViewer = (props: any) => {
     setVisible(false)
     setNumber(0)
   }, [])
- const onAndroidSharePress = async() => await Share.open({
-  title: "This is my file ",
-  subject: "Pdf File",
-  message:`file://${props?.data}`
-});
- 
-  const add = (value:any)=>{
+  const shareOptions = {
+    title: 'Share via',
+    message: `file://${props?.data}`,
+    url: `file://${props?.data}`,
+    filename: 'test' , // only for base64 file in Android
+  };
+  const onAndroidSharePress = async () =>{ Share.share(shareOptions)}
+
+  const add = (value: any) => {
     setText(value.replace(/[^a-zA-Z0-9 ]/g, "").replace(" ", ""))
   }
   return (
@@ -60,7 +62,7 @@ export const PdfViewer = (props: any) => {
               console.log(`Link pressed: ${uri}`);
             }}
             style={styles.pdf} />
-       
+
           :
           <ModalView
             visible={visible}
@@ -70,12 +72,12 @@ export const PdfViewer = (props: any) => {
             onOpen={() => text.length > 0 && setVisible(false)}
             onClose={() => {
               setNumber(0), setVisible(false),
-              props.navigation.navigation.goBack()
+                props.navigation.navigation.goBack()
             }}
             close={'CLOSE'}
             open={'OPEN'} />
         }
-        <Button onPress={()=>Linking.openURL(`file://${props?.data}`)} containerStyle={{width:scaledSize(100),height:scaledSize(80),top:scaledSize(10)}} title={'Share'}/>
+        <Button onPress={() => onAndroidSharePress()} containerStyle={{ width: scaledSize(100), height: scaledSize(80), top: scaledSize(10) }} title={'Share'} />
       </View>
     </>)
 }

@@ -25,7 +25,7 @@ export const CardViewerPage = (props: any) => {
                 try {
                     const options = {
                         imagePaths: arr,
-                        name: res[0].size?.toString(),
+                        name: 'PdfName',
                         maxSize: { // optional maximum image dimension - larger images will be resized
                             width: 900,
                             height: Math.round(Dimensions.get('window').height / Dimensions.get('window').width * 900),
