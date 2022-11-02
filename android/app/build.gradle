@@ -224,6 +224,7 @@ dependencies {
     // For example, to use Firebase Authentication and Cloud Firestore
    implementation platform('com.google.firebase:firebase-bom:30.4.1')
    compile project(':react-native-image-to-pdf')
+   implementation project(':react-native-share-pdf')
    implementation 'com.google.firebase:firebase-analytics'
    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"

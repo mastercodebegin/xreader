@@ -1,10 +1,12 @@
 //@ts-nocheck
 import { StackActions } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, Dimensions, Alert, Share, Modal, TouchableOpacity, TextInput, Linking } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, Alert, Modal, TouchableOpacity, TextInput, Linking } from 'react-native'
 import Pdf from 'react-native-pdf';
 import { scaledSize } from '../helper/util/Utilities';
-//import Share from 'react-native-share';
+import RNFetchBlob from 'rn-fetch-blob';
+import RNShareFile from 'react-native-share-pdf';
+import Share from 'react-native-share';
 import { deviceBasedDynamicDimension } from '../helper/util/scale';
 import { COLORS } from "../utilies/GlobalColors";
 import ModalView from './modalView';
@@ -19,13 +21,16 @@ export const PdfViewer = (props: any) => {
     setVisible(false)
     setNumber(0)
   }, [])
-  const shareOptions = {
-    title: 'Share via',
-    message: `file://${props?.data}`,
-    url: `file://${props?.data}`,
-    filename: 'test' , // only for base64 file in Android
-  };
-  const onAndroidSharePress = async () =>{ Share.share(shareOptions)}
+  const onAndroidSharePress = async () => { 
+    RNFetchBlob.fs
+    .readFile(props?.data, 'base64')
+    .then(async (data) => {
+      Share.open({
+        filename:'PdfName',
+        url:'data:application/pdf;base64,' + data
+      })
+    })
+    .catch((err) => {}); }
 
   const add = (value: any) => {
     setText(value.replace(/[^a-zA-Z0-9 ]/g, "").replace(" ", ""))

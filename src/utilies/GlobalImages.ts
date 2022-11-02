@@ -1,7 +1,8 @@
 export const Home:any  =require('../assets/house.png')
 export const Time:any  =require('../assets/timeline.png')
-
-
+export const Bottomtab1:any  =require('../assets/bottom-1.png')
+export const Bottomtab2:any  =require('../assets/bottom-2.png')
+export const BGImage:any  =require('../assets/pdf-bg.png')
 export const Files:any  =require('../assets/file.png')
 export const Images:any  =require('../assets/223117.png')
 export const Pdf1:any  =require('../assets/pdf1.png')

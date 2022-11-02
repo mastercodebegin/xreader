@@ -9,9 +9,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { scaledSize } from '../helper/util/Utilities';
 import { useIsFocused } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { AppBG, Camera, Files, Home, Settings, Time, Tools } from '../utilies/GlobalImages';
+import { AppBG, BGImage, Bottomtab1, Camera, Files, Home, Settings, Time, Tools } from '../utilies/GlobalImages';
 import { TimeLinePage } from '../screen/timeline/timeline';
-const ScannerView = () =>{
+const ScannerView = () => {
   return (
     <View>
       <Text>Scanner</Text>
@@ -19,7 +19,7 @@ const ScannerView = () =>{
   )
 }
 
-const SettingsView = () =>{
+const SettingsView = () => {
   return (
     <View>
       <Text>Settings</Text>
@@ -73,7 +73,14 @@ export default BottomTabsNavigator = () => {
   const BottomTabs = createBottomTabNavigator()
   return (
     // <ImageBackground source={AppBG} resizeMode='contain'>
-    <BottomTabs.Navigator screenOptions={{ headerShown: false, tabBarStyle: styles.bottomTabStyle, tabBarHideOnKeyboard: true }}>
+    <BottomTabs.Navigator screenOptions={{
+      headerShown: false, tabBarBackground: () => {
+        return <ImageBackground source={Bottomtab1}
+          style={{ width: '100%', height: '100%' }}>
+          <View></View>
+        </ImageBackground>
+      }, tabBarStyle: styles.bottomTabStyle, tabBarHideOnKeyboard: true
+    }}>
       {screensData.map((item, key) =>
         <BottomTabs.Screen key={key} name={item.name} component={item.component}
           options={{
@@ -82,10 +89,10 @@ export default BottomTabsNavigator = () => {
                 <Image resizeMode='contain' resizeMethod='resize' source={item.unfocus} style={[styles.tabbarIcon, { top: scaledSize(0), left: scaledSize(0) }]} />
                 :
                 <Image resizeMode='contain' resizeMethod='resize' source={item.unfocus} style={[styles.tabbarIcon, { top: scaledSize(0), left: scaledSize(0) }]} />
-                ),
+            ),
 
             tabBarLabel: ({ focused }) => (
-              <Text style={{ fontSize: item.name == 'Booking History' ? 7 : 9, color: focused ? COLORS.black : COLORS.grey, fontWeight: '200', top: focused ? scaledSize(-2) : scaledSize(-2), left: scaledSize(1), marginBottom: scaledSize(6), fontFamily: FONTS.MerriweatherBold }}>{item?.name}</Text>
+              <Text style={{ fontSize: item.name == 'Booking History' ? 7 : 9, color: focused ? COLORS.darkBlue : COLORS.grey, fontWeight: '200', top: focused ? scaledSize(-2) : scaledSize(-2), left: scaledSize(1), marginBottom: scaledSize(6), fontFamily: FONTS.MerriweatherBold }}>{item?.name}</Text>
             ),
           }}
         />)}
@@ -96,9 +103,9 @@ export default BottomTabsNavigator = () => {
 }
 
 const styles = StyleSheet.create({
-  bottomWrapper: { flex: 1,  },
+  bottomWrapper: { flex: 1, },
   bottomTabStyle: {
-    // backgroundColor: 'tra',
+    // backgroundColor: COLORS.TRANSPARENT,
     position: 'absolute',
     borderTopWidth: 0.5,
     elevation: 10,

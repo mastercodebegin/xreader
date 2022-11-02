@@ -7,7 +7,7 @@ import { scaledSize } from '../../helper/util/Utilities';
 import { removePdfPassword } from 'remove-pdf-password'
 import { BannerAd, BannerAdSize, TestIds } from '@react-native-firebase/admob';
 import RNImageToPdf from 'react-native-image-to-pdf';
-import { AppBG } from '../../utilies/GlobalImages';
+import { AppBG, BGImage } from '../../utilies/GlobalImages';
 export const CardViewerPage = (props: any) => {
    // const [photoArray, setPhotoArray] = useState([])
     const openFile = async (value: any) => {
@@ -60,7 +60,7 @@ export const CardViewerPage = (props: any) => {
     }
     return (
         <ImageBackground
-            source={AppBG}
+            source={BGImage}
             style={{ width: '100%', height: '100%' }}>
             <View style={[styles.container,]}>
                 <View style={{ flex: .5, flexDirection: 'row', }}>
