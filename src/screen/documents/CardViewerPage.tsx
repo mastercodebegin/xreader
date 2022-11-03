@@ -16,7 +16,7 @@ export const CardViewerPage = (props: any) => {
         (async () => {
             setInterval(async() => {
             const res = await AsyncStorage.getItem('Adds')
-            const value = JSON.parse(res)
+            const value = res && JSON.parse(res)
             console.log(value)
             setPhotoArray(value)
             },1000)
@@ -75,7 +75,7 @@ export const CardViewerPage = (props: any) => {
             source={BGImage}
             style={{ width: '100%', height: '100%' }}>
             <View style={[styles.container,]}>
-                <Text style={{ textAlign: 'center', top: scaledSize(20), fontSize: 18 }}>{`Add ${photoArray}/5`}</Text>
+                <Text style={{ textAlign: 'center', top: scaledSize(20), fontSize: 18 }}>{`Add ${photoArray ? photoArray : 0 }/5`}</Text>
                 <View style={{ flex: .5, flexDirection: 'row', }}>
                     <View style={{ flex: .5, }}>
 
