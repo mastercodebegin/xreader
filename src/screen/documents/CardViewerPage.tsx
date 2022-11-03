@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity, ImageBackground } from 'react-native'
 import DocumentPicker from 'react-native-document-picker';
 import { CardViewer } from '../../component/CardView';
@@ -8,8 +8,20 @@ import { removePdfPassword } from 'remove-pdf-password'
 import { BannerAd, BannerAdSize, TestIds } from '@react-native-firebase/admob';
 import RNImageToPdf from 'react-native-image-to-pdf';
 import { AppBG, BGImage } from '../../utilies/GlobalImages';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { InitialListner, interstitialAd } from '../../component/Admob';
 export const CardViewerPage = (props: any) => {
-   // const [photoArray, setPhotoArray] = useState([])
+     const [photoArray, setPhotoArray] = useState(0)
+    useEffect(() => {
+        (async () => {
+            setInterval(async() => {
+            const res = await AsyncStorage.getItem('Adds')
+            const value = JSON.parse(res)
+            console.log(value)
+            setPhotoArray(value)
+            },1000)
+        })()
+    }, [])
     const openFile = async (value: any) => {
         try {
             if (value == 5) {
@@ -17,11 +29,11 @@ export const CardViewerPage = (props: any) => {
                     type: [value == 0 ? DocumentPicker.types.pdf : value == 1 ? DocumentPicker.types.docx : value == 2 ? DocumentPicker.types.xlsx : value == 3 ? DocumentPicker.types.ppt : value == 4 ? DocumentPicker.types.pdf : value == 5 ? DocumentPicker.types.images : DocumentPicker.types.allFiles]
                 });
                 let arr = []
-                res.map((item)=>{
+                res.map((item) => {
                     let obj = item.uri
                     arr.push(obj)
                 })
-                console.log(arr,res, '------------------');
+                console.log(arr, res, '------------------');
                 try {
                     const options = {
                         imagePaths: arr,
@@ -34,7 +46,7 @@ export const CardViewerPage = (props: any) => {
                     };
                     const pdf = await RNImageToPdf.createPDFbyImages(options);
                     props.navigation.navigate('AllDocumentView', { source: pdf.filePath, props: props })
-                    console.log(pdf.filePath,'pdf path');
+                    console.log(pdf.filePath, 'pdf path');
                 } catch (e) {
                     console.log(e);
                 }
@@ -63,6 +75,7 @@ export const CardViewerPage = (props: any) => {
             source={BGImage}
             style={{ width: '100%', height: '100%' }}>
             <View style={[styles.container,]}>
+                <Text style={{ textAlign: 'center', top: scaledSize(20), fontSize: 18 }}>{`Add ${photoArray}/5`}</Text>
                 <View style={{ flex: .5, flexDirection: 'row', }}>
                     <View style={{ flex: .5, }}>
 

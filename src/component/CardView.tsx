@@ -1,4 +1,5 @@
 //@ts-nocheck
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AdEventType, RewardedAdEventType } from '@react-native-firebase/admob';
 import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, Dimensions, FlatList, Image, TouchableOpacity, ImageBackground } from 'react-native'
@@ -13,12 +14,18 @@ const images = [
     { image: ExcelBG, icon:ExcelIcon,name: 'excel', count: 0, id: 3 },
     { image: PowerpointBG, icon:PowerpointIcon,name: 'ppt', count: 0, id: 4 },
     { image: AcrobatIcon, icon:AcrobatIcon,name: 'images', count: 0, id: 5 },
-    { image: WordBG, icon:Images,name: 'images', count: 0, id: 6 }
+    { image: WordBG, icon:Images,name: 'sheets', count: 0, id: 6 }
 ];
 export const CardViewer = (props: any) => {
     const [data, setData] = useState(images)
+    const [count, setCount] = useState(0)
     const [rewardedAdLoaded, setRewardedAdLoaded] = React.useState(false);
     useEffect(() => {
+        (async()=>{
+        const res = await AsyncStorage.getItem('Adds')
+        const json = res && JSON.parse(res)
+        setCount(json)
+       
         let value = [...images]
         const eventListener = rewardInterstitialAd.onAdEvent(async (type, error, reward) => {
             if (type === RewardedAdEventType.LOADED) {
@@ -51,23 +58,26 @@ export const CardViewer = (props: any) => {
         return () => {
             eventListener();
         };
+    })()
     }, [])
 
     const _renderItem = ({ item, index }) => {
         return <View style={{flex:1,justifyContent:'flex-end',
         alignItems:'center',marginTop:scaledSize(10)}}>
-        <TouchableOpacity key={index} style={{alignSelf:'center',}} onPress={() => {
-            let value = [...images]
-            if (item.count < 4) {
-                value.map((int) => {
-                    if (int.id == item.id) {
-                        return int.count = item.count + 1
-                    }
-                })
-                setData(value)
+        <TouchableOpacity key={index} style={{alignSelf:'center',}} onPress={async() => {
+           // let value = [...images]
+           let cal = count
+            if (count < 4) {
+                cal = count + 1
+               setCount(cal)
+                //await AsyncStorage.setItem('PdfArray', JSON.stringify(value))
+                await AsyncStorage.setItem('Adds', JSON.stringify(cal))
                 props.onClick(index)
             }
             else {
+               // setData(images)
+                setCount(0)
+                await AsyncStorage.setItem('Adds', JSON.stringify(0))
                 rewardInterstitialAd.show();
             }
         }}>

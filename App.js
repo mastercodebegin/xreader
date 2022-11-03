@@ -8,7 +8,9 @@ export default App = () => {
   //const [source, setSource] = React.useState(path);
   const [os, setOs] = useState(Platform.OS == 'ios' ? false : true)
   useEffect(() => {
+    setInterval(async() => {
     InitialListner()
+    },1000)
     if (Platform.OS === 'android') {
       requestStoragePermission();
     }
