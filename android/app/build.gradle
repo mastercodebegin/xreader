@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: 'com.google.gms.google-services' // <- Add this line
 
 import com.android.build.OutputFile
 
@@ -140,7 +141,7 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.shopax.initapp"
+        applicationId "com.shopax.xreader"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -216,10 +217,18 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+
+    // Add the SDKs for any other Firebase products you want to use in your app
+    // For example, to use Firebase Authentication and Cloud Firestore
+   implementation platform('com.google.firebase:firebase-bom:30.4.1')
+   implementation 'com.google.firebase:firebase-analytics'
+   implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
     compile project(':react-native-fs')
+    implementation project(path: ":@react-native-firebase_app")
     compile 'com.android.support:multidex:1.0.3' 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 //compile project(':react-native-doc-viewer')

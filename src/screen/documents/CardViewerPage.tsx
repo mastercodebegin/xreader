@@ -5,6 +5,7 @@ import { DocumentView, RNPdftron } from "react-native-pdftron";
 import DocumentPicker from 'react-native-document-picker';
 import { CardViewer } from '../../component/CardView';
 import { scaledSize } from '../../helper/util/Utilities';
+import { BannerAd, BannerAdSize } from '@react-native-firebase/admob';
 export const CardViewerPage = (props: any) => {
 
     const openFile = async (value: any) => {
@@ -28,26 +29,27 @@ export const CardViewerPage = (props: any) => {
     }
     return (
         <View style={styles.container}>
-            <Text style={styles.textStyle}>Good Morning.</Text>
+            {/* <Text style={styles.textStyle}>Good Morning.</Text>
             <Text style={styles.textStyle2}>Ricky</Text>
             <TouchableOpacity style={styles.viewBox}>
                 <Text style={{left:scaledSize(20),top:scaledSize(20),color:'white',fontSize:19}}>Avaliable Space: 16gb</Text>
             </TouchableOpacity>
-            <Text style={styles.textStyle3}>Categories</Text>
+            <Text style={styles.textStyle3}>Categories</Text> */}
             <CardViewer onClick={openFile} />
-        </View>)
+            </View>
+    )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#eff2ef',
-        justifyContent: 'flex-start',
-        marginLeft: scaledSize(20),
-        marginRight: scaledSize(20)
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        //marginLeft: scaledSize(20),
+        //marginRight: scaledSize(20)
         // alignItems: 'center'
     },
-    viewBox: { height: scaledSize(120), elevation: 2, backgroundColor: '#694ff2', marginTop: scaledSize(15), borderRadius: 10 },
+    viewBox: { elevation: 2, backgroundColor: '#694ff2', marginTop: scaledSize(15), borderRadius: 10 },
     textStyle: {
         fontSize: scaledSize(20), marginTop: scaledSize(30), fontStyle: 'normal', marginLeft: scaledSize(5)
     },

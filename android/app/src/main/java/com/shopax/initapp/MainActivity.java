@@ -1,4 +1,4 @@
-package com.shopax.initapp;
+package com.shopax.xreader;
 
 import com.facebook.react.ReactActivity;
 

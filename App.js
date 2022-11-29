@@ -15,6 +15,7 @@ import { PdfViewer } from './src/component/PdfViewer';
 import { DocumentView, RNPdftron } from "react-native-pdftron";
 import { AllDocViewer } from './src/component/AllDocumentViewer';
 import { CardViewer } from './src/component/CardView';
+import { InitialListner } from './src/component/Admob'
 import StackNavigator from './src/navigation/StackNavigator';
 var RNFS = require('react-native-fs');
 var SavePath = Platform.OS === 'ios' ? RNFS.MainBundlePath : RNFS.DocumentDirectoryPath;
@@ -24,6 +25,7 @@ export default App = () => {
   //const [source, setSource] = React.useState(path);
   const [os, setOs] = useState(Platform.OS == 'ios' ? false : true)
   useEffect(() => {
+    InitialListner()
     RNPdftron.initialize("Insert commercial license key here after purchase");
     RNPdftron.enableJavaScript(true);
     if (Platform.OS === 'android') {
