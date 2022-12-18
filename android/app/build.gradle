@@ -142,6 +142,15 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
+        
+configurations.all {
+resolutionStrategy { 
+force 'com.facebook.react:react-native:0.66.0'
+force 'androidx.appcompat:appcompat:1.3.1'
+force 'androidx.appcompat:apDcompat-resources:1.3.1'
+force 'androidx.browser:browser:1.3.0'
+force 'androidx.tracing:tracing:1.0.0'
+}}
         applicationId "com.shopax.xreader"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion

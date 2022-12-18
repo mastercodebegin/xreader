@@ -13,6 +13,8 @@ import com.maximegerbe.reactnative.sharefile.ShareFilePackage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.anyline.RNImageToPDF.RNImageToPdfPackage;
+// import com.facebook.react.bridge.JSIModulePackage; // <- add
+//   import com.swmansion.reanimated.ReanimatedJSIModulePackage; // <- add
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -42,14 +44,18 @@ public class MainApplication extends Application implements ReactApplication {
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
   }
-
+    
   @Override
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
-
+// @Override
+//       protected JSIModulePackage getJSIModulePackage() {
+//         return new ReanimatedJSIModulePackage(); // <- add
+//       }
+//     };
   /**
    * Loads Flipper in React Native templates. Call this in the onCreate method with something like
    * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
