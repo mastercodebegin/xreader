@@ -23,14 +23,14 @@ export const PdfViewer = (props: any) => {
   return (
     <>
       <View style={styles.container}>
-        {!visible ?
+       
           <Pdf
             trustAllCerts={false}
             password={text}
             onPressLink={(uri) => {
               console.log(`Link pressed: ${uri}`);
             }}
-            source={{ uri: props?.data }}
+            source={source }
             onError={(error) => {
               setTimeout(() => {
                 setVisible(true)
@@ -38,34 +38,15 @@ export const PdfViewer = (props: any) => {
 
               setNumber((prev) => prev + 1)
               console.log(error, num, text, 'error')
-              // Alert.alert(
-              //   `Password Required!`,
-              //   "",
-              //   [
-              //     { text: "Enter Password", onPress: () => { setVisible(true) } },
-              //     { text: "Cancel", onPress: () => { props.navigation.navigation.goBack() } }
-              //   ]
-              // );
+             
             }
             }
             onPressLink={(uri) => {
               console.log(`Link pressed: ${uri}`);
             }}
             style={styles.pdf} />
-          :
-          <ModalView
-            visible={visible}
-            text={text}
-            onText={add}
-            num={num}
-            onOpen={() => text.length > 0 && setVisible(false)}
-            onClose={() => {
-              setNumber(0), setVisible(false),
-              props.navigation.navigation.goBack()
-            }}
-            close={'CLOSE'}
-            open={'OPEN'} />
-        }
+        
+          
       </View>
     </>)
 }

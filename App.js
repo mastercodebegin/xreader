@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Dimensions, Platform, Alert, Permission, Native
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { InitialListner } from './src/component/Admob'
 import StackNavigator from './src/navigation/StackNavigator';
+import { PdfViewer } from './src/component/PdfViewer';
 const path = "http://samples.leanpub.com/thereactnativebook-sample.pdf";
 export default App = () => {
   //const [source, setSource] = React.useState(path);
@@ -36,7 +37,8 @@ export default App = () => {
 
   return (
     <NavigationContainer>	
-      <StackNavigator/>
+      {/* <StackNavigator/> */}
+      <PdfViewer/>
     </NavigationContainer>	
       )
 }
