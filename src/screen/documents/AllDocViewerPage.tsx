@@ -8,7 +8,7 @@ import  { PdfViewer }  from '../../component/PdfViewer'
 const path = "http://samples.leanpub.com/thereactnativebook-sample.pdf";
 export const AllDocViewerPage = (props:any) => {
 useEffect(()=>{
-console.log(props)
+console.log("AllDocViewerPage>>>>>>>>>>>>>>>>",props)
 },[])
     const onLeadingNavButtonPressed = () => {
         console.log("leading nav button pressed");

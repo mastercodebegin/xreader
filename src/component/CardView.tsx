@@ -20,67 +20,68 @@ export const CardViewer = (props: any) => {
     const [data, setData] = useState(images)
     const [count, setCount] = useState(0)
     const [rewardedAdLoaded, setRewardedAdLoaded] = React.useState(false);
-    useEffect(() => {
-        (async()=>{
-        const res = await AsyncStorage.getItem('Adds')
-        const json = res && JSON.parse(res)
-        setCount(json)
+    // useEffect(
+        // () => {
+        // (async()=>{
+        // const res = await AsyncStorage.getItem('Adds')
+        // const json = res && JSON.parse(res)
+        // setCount(json)
        
-        let value = [...images]
-        const eventListener = rewardInterstitialAd.onAdEvent(async (type, error, reward) => {
-            if (type === RewardedAdEventType.LOADED) {
-                setRewardedAdLoaded(true);
-            }
-            if (type === RewardedAdEventType.EARNED_REWARD) {
-                console.log("rewarded with=================================================", reward);
-                value.map((int: any) => {
-                    return int.count = 0
-                })
-                setData(value)
-            }
-            if (type === AdEventType.OPENED) {
-                setRewardedAdLoaded(false);
-            }
-            if (type === AdEventType.CLOSED) {
-                setRewardedAdLoaded(false);
-                rewardInterstitialAd.load();
-            }
-        });
+        // let value = [...images]
+        // const eventListener = rewardInterstitialAd.onAdEvent(async (type, error, reward) => {
+        //     if (type === RewardedAdEventType.LOADED) {
+        //         setRewardedAdLoaded(true);
+        //     }
+        //     if (type === RewardedAdEventType.EARNED_REWARD) {
+        //         console.log("rewarded with=================================================", reward);
+        //         value.map((int: any) => {
+        //             return int.count = 0
+        //         })
+        //         setData(value)
+        //     }
+        //     if (type === AdEventType.OPENED) {
+        //         setRewardedAdLoaded(false);
+        //     }
+        //     if (type === AdEventType.CLOSED) {
+        //         setRewardedAdLoaded(false);
+        //         rewardInterstitialAd.load();
+        //     }
+        // });
 
         // Start loading the rewarded ad straight away
-        if (rewardInterstitialAd.loaded) {
-            setRewardedAdLoaded(true);
-        } else {
-            rewardInterstitialAd.load();
-        }
+    //     if (rewardInterstitialAd.loaded) {
+    //         setRewardedAdLoaded(true);
+    //     } else {
+    //         rewardInterstitialAd.load();
+    //     }
 
-        // Unsubscribe from events on unmount
-        return () => {
-            eventListener();
-        };
-    })()
-    }, [])
+    //     // Unsubscribe from events on unmount
+    //     return () => {
+    //         eventListener();
+    //     };
+    // })()
+    // }, [])
 
     const _renderItem = ({ item, index }) => {
         return <View style={{flex:1,justifyContent:'flex-end',
         alignItems:'center',marginTop:scaledSize(10)}}>
-        <TouchableOpacity key={index} style={{alignSelf:'center',}} onPress={async() => {
-           // let value = [...images]
-           let cal = count
-            if (count < 4) {
-                cal = count + 1
-               setCount(cal)
-                //await AsyncStorage.setItem('PdfArray', JSON.stringify(value))
-                await AsyncStorage.setItem('Adds', JSON.stringify(cal))
+        <TouchableOpacity key={index} style={{alignSelf:'center',}} onPress={() => 
+        //    // let value = [...images]
+        //    let cal = count
+        //     if (count < 4) {
+        //         cal = count + 1
+        //        setCount(cal)
+        //         //await AsyncStorage.setItem('PdfArray', JSON.stringify(value))
+        //         await AsyncStorage.setItem('Adds', JSON.stringify(cal))
                 props.onClick(index)
-            }
-            else {
-               // setData(images)
-                setCount(0)
-                await AsyncStorage.setItem('Adds', JSON.stringify(0))
-                rewardInterstitialAd.show();
-            }
-        }}>
+            // }
+            // else {
+            //    // setData(images)
+            //     setCount(0)
+            //     await AsyncStorage.setItem('Adds', JSON.stringify(0))
+            //     rewardInterstitialAd.show();
+            // }
+        }>
 
            {/* <Text>{item.name}</Text> */}
             <ImageBackground

@@ -18,8 +18,10 @@ export const PdfViewer = (props: any) => {
   const [visible, setVisible] = useState(false)
   const [source, setSource] = React.useState({ uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf', cache: true });
   useEffect(() => {
-    setVisible(false)
-    setNumber(0)
+    console.log("PdfViewer >>>>>>>>>>>>>>>>>>",props);
+    
+    // setVisible(false)
+    // setNumber(0)
   }, [])
   const onAndroidSharePress = async () => { 
     RNFetchBlob.fs
@@ -45,14 +47,14 @@ export const PdfViewer = (props: any) => {
             onPressLink={(uri) => {
               console.log(`Link pressed: ${uri}`);
             }}
-            source={{ uri: props?.data }}
+            source={source}
             onError={(error) => {
               setTimeout(() => {
                 setVisible(true)
               }, 380);
 
-              setNumber((prev) => prev + 1)
-              console.log(error, num, text, 'error')
+              // setNumber((prev) => prev + 1)
+              // console.log(error, num, text, 'error')
               // Alert.alert(
               //   `Password Required!`,
               //   "",
@@ -63,9 +65,9 @@ export const PdfViewer = (props: any) => {
               // );
             }
             }
-            onPressLink={(uri) => {
-              console.log(`Link pressed: ${uri}`);
-            }}
+            // onPressLink={(uri) => {
+            //   console.log(`Link pressed: ${uri}`);
+            // }}
             style={styles.pdf} />
 
           :

@@ -40,14 +40,14 @@ export default BottomTabsNavigator = () => {
   const [cartData, setCartData] = useState(0)
   const isFocused = useIsFocused();
 
-  useEffect(() => {
-    if (isFocused) {
-      setInterval(() => {
-        values()
-      }, 1000);
-      //  console.log(cartData)
-    }
-  }, [isFocused])
+  // useEffect(() => {
+  //   if (isFocused) {
+  //     setInterval(() => {
+  //       values()
+  //     }, 1000);
+  //     //  console.log(cartData)
+  //   }
+  // }, [isFocused])
 
   function removeDuplicates(originalArray, prop) {
     var newArray = [];

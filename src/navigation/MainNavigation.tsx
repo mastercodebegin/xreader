@@ -70,7 +70,8 @@ const MyDrawer: React.FC<myProps> = (props) => {
       initialRouteName="Home1"
       drawerStyle={{ width: "60%", backgroundColor: "transparent" }}
     >
-      <Drawer.Screen name="Home1" options={{title:'',headerStyle:{backgroundColor:'orange'}}} component={BottomTabNavigator} />
+      <Drawer.Screen name="Home1" options={{title:'',headerStyle:{backgroundColor:'orange'}}} 
+      component={BottomTabNavigator} />
       {/* <Drawer.Screen name="subscription" component={SubscriptionNavigator} /> */}
     </Drawer.Navigator>
   );
@@ -82,7 +83,7 @@ const LandingNavigator: React.FC<myProps> = (props) => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
-      name="Dashboard"
+      name="DrawerHome"
       options={{
        headerShown:false,
         headerLeft: () => (
