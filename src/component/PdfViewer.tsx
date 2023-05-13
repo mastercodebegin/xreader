@@ -45,7 +45,7 @@ export const PdfViewer = (props: any) => {
             onPressLink={(uri) => {
               console.log(`Link pressed: ${uri}`);
             }}
-            source={{ uri: props?.data }}
+            source={{ uri: source }}
             onError={(error) => {
               setTimeout(() => {
                 setVisible(true)

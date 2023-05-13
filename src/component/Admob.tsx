@@ -18,6 +18,7 @@ export const InitialListner=async()=>{
     //     // setLoading(false);
     //   });
       admob()
+      
       .setRequestConfiguration({
         // Update all future requests suitable for parental guidance
         maxAdContentRating: MaxAdContentRating.PG,

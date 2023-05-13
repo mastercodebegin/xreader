@@ -20,12 +20,13 @@ export const CardViewer = (props: any) => {
     const [data, setData] = useState(images)
     const [count, setCount] = useState(0)
     const [rewardedAdLoaded, setRewardedAdLoaded] = React.useState(false);
+
     useEffect(() => {
         (async()=>{
         const res = await AsyncStorage.getItem('Adds')
         const json = res && JSON.parse(res)
         setCount(json)
-       
+       rewardInterstitialAd.load()
         let value = [...images]
         const eventListener = rewardInterstitialAd.onAdEvent(async (type, error, reward) => {
             if (type === RewardedAdEventType.LOADED) {
